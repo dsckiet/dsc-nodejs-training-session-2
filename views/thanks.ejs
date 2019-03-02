@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Thanks!</title>
+	<style type="text/css">
+		.container {
+			margin: 10vh 40vw;
+		}
+		.card{
+			padding: 24px;
+			border-radius: 4px;
+			border: 2px solid steelblue;
+			box-shadow: 5px 5px gray;
+			background: url('./back.jpg');
+		}
+		h1{
+			font-size: 20px;
+			font-weight: 700;
+			font-family: cursive;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<h1>Hi!</h1>
+			<% if (message == "error") { %>
+				<h1 style="color:red;">
+					<%= message %>
+				</h1>
+			<% } else if(message == "success") {%>
+				<h1 style="color:green;">
+					<%= message %>
+				</h1>
+			<% } else if(message == "already registered") { %>
+				<h1 style="color:orange;">
+					<%= message %>
+				</h1>
+			<% } %>
+		</div>
+	</div>
+</body>
+</html>

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const app = express();
+const path = require("path");
 const dburl = "mongodb://dsckiet:dsc123@ds153495.mlab.com:53495/dsckiet-demo-db";
 const Blog = require("./models/Blog");
 
@@ -13,6 +14,7 @@ mongoose.connect(dburl, (err) => {
 	console.log("mlab connected");
 });
 
+app.use(express.static(path.join(__dirname,'public')));
 
 app.get("/", (req, res) => {
 	Blog.find({}, (err, blog) => {
@@ -22,17 +24,25 @@ app.get("/", (req, res) => {
 	res.send("hi");
 });
 
-app.post("/index", (req, res) => {
-	console.log(req.body);
-	Blog.create({title: req.body.blogtitle, text: req.body.blogtext}, (err, done) => {
-		if(err) console.log(err);
-		else res.send("done")
-	});
-});
-
-
 app.get("/about", (req, res) => {
 	res.render("index.ejs");
+});
+
+app.get("/thanks",(req,res) => {
+	res.render("thanks.ejs");
+});
+
+app.post("/index", (req, res) => {
+	Blog.findOne({title: req.body.blogtitle}, (err, entry) => {
+		if(err) res.render("thanks.ejs",{message: "error"});
+		if(entry) res.render("thanks.ejs", {message: "already registered"});
+		else{
+			Blog.create({title: req.body.blogtitle, text: req.body.blogtext, category: req.body.blogcategory}, (err, done) => {
+				if(err) res.render("thanks.ejs",{message: "error"});
+				else res.render("thanks.ejs",{message: "success"});
+			});
+		}
+	});
 });
 
 app.listen(3000, () => console.log("server started"));

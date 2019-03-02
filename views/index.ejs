@@ -1,12 +1,106 @@
+<!DOCTYPE html>
 <html>
-	<head>Document</head>
-	<body>
-		<h1>Heading</h1>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  height: 100vh;
+  font-family: monospace;
+  padding: 0;
+  margin: 0;
+}
 
-		<form action="/index" method="POST">
-			<input type="text" name="blogtitle">
-			<input type="text" name="blogtext">
-			<button>Submit</button>
-		</form>
-	</body>
+.bg-img {
+  background-image: url("./back.jpg");
+  min-height: 380px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+/* Add styles to the form container */
+.container {
+  padding-top: 18vh;
+}
+
+.card{
+  box-shadow: 5px 5px 8px gray;
+  padding: 16px;
+  width: 300px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], select {
+  width: 270px;
+  padding: 15px;
+  border-radius: 2px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+select{
+	width: 100%;
+}
+
+input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s all ease;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+
+<div class="bg-img">
+	<div class="container">
+	  <form action="/index" method="post" class="card">
+	    <h1 style="text-align: center;">Blog</h1>
+
+	    <div>
+	    	<label for="title"><b>Blog Title</b></label>
+	    	<input type="text" placeholder="Blog Title" name="blogtitle" required>
+	    </div>
+
+	    <div>
+	    	<label for="description"><b>Blog Description</b></label>
+	    	<input type="text" placeholder="Description" name="blogtext" required>
+	    </div>
+
+	    <div>
+	    	<label for="description"><b>Blog Category</b></label>
+		    <select name="blogcategory">
+			  <option value="tech">Tech</option>
+			  <option value="bio">Bio</option>
+			  <option value="history">History</option>
+			</select>
+	    </div>
+
+	    <button type="submit" class="btn">Submit</button>
+	  </form>
+	</div>	
+</div>
+
+
+
+</body>
 </html>
